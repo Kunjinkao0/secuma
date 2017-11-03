@@ -26,6 +26,7 @@ node_modules
 
 # dependencies
 /angular/node_modules
+vscode
 
 # IDEs and editors
 /.idea
