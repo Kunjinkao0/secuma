@@ -1,0 +1,61 @@
+lib-cov
+*.seed
+*.log
+*.csv
+*.dat
+*.out
+*.pid
+*.gz
+
+pids
+logs
+results
+
+npm-debug.log
+node_modules
+
+
+###########################
+### belowings are angular......
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# compiled output
+/angular/dist
+/angular/tmp
+/angular/out-tsc
+
+# dependencies
+/angular/node_modules
+
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# misc
+/angular/.sass-cache
+/angular/connect.lock
+/angular/coverage
+/angular/libpeerconnection.log
+/angular/npm-debug.log
+/angular/testem.log
+/angular/typings
+
+# e2e
+/angular/e2e/*.js
+/angular/e2e/*.map
+
+# System Files
+.DS_Store
+Thumbs.db
