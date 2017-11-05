@@ -5,20 +5,18 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var index = require('./routes/index');
-
 var app = express();
 
 // allow cross origin access
-// app.all('*',function(req,res,next){
-// 	res.header("Access-Control-Allow-Origin","*");
-// 	res.header("Access-Control-Allow-Headers","X-Requested-With");
-// 	res.header("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
-// 	res.header("X-Powered-By","3.2.1");
-// 	// res.header("Content-Type","application/json;charset=utf-8");
-// 	// res.header("Content-Type", "text/html;charset=utf-8");
-// 	next();
-// });
+app.all('*',function(req,res,next){
+	res.header("Access-Control-Allow-Origin","*");
+	// res.header("Access-Control-Allow-Headers","X-Requested-With");
+	// res.header("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
+	// res.header("X-Powered-By","3.2.1");
+	// res.header("Content-Type","application/json;charset=utf-8");
+	// res.header("Content-Type", "text/html;charset=utf-8");
+	next();
+});
 
 // uncomment after placing your favicon in /public
 app.use(bodyParser.json());
@@ -28,7 +26,11 @@ app.use(logger('dev'));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('*', index);
+var index = require('./routes/index');
+var zdir = require('./routes/zdir');
+
+app.use('/', index);
+app.use('/getdir', zdir);
 
 // // catch 404 and forward to error handler
 // app.use(function(req, res, next) {

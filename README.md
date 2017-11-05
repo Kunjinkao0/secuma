@@ -1,5 +1,4 @@
 # SECURIY M A**
-
 Online editor, could deploy on any web sites, to modify your code/file remotely.
 
 ###### Angular4
@@ -8,7 +7,12 @@ Online editor, could deploy on any web sites, to modify your code/file remotely.
 ###### Node.js
 - v6.* recommad. Recommand to use [nvm](https://github.com/creationix/nvm) to configure.
 
-
+### Configure & Run
+Angular hold the different path in `/angular`, so it will be needed to excute 2 times' installation.
+````
+$ npm install // as project folder, node.js
+$ cd angular & npm install // to envrionment the angular
+````
 
 ### v0.1 - Current
 initial build scripts with angular4 and nodejs.
