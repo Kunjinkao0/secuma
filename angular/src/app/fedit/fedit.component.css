@@ -1,0 +1,15 @@
+#fedit {
+    flex: 1 1 auto;
+    display: flex;
+}
+
+#area {
+    flex: 1 1 auto;
+    display: flex;
+}
+
+textarea {
+    width: 100%;
+    flex: 1 1 auto;
+    resize: none;
+}

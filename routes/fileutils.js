@@ -18,27 +18,6 @@ function isDirectory(path) {
     return stat.isDirectory();
 }
 
-exports.getDetail = path => {
-    path = ROOT + path;
-
-    if (path.endsWith('/')) {
-        path = path.substring(0, path.length - 1);
-    }
-
-    if (!exists(path)) {
-        return path + ' not exists.';
-    }
-
-    let stat = fs.statSync(path);
-    let file = getFileStat(stat);
-    file.path = path.substring(ROOT.length) || '/';
-    if (stat.isDirectory()) {
-        file.children = getChildren(path);
-    }
-
-    return file;
-}
-
 function getChildren(dirpath) {
     dirpath += '/';
 
@@ -63,4 +42,42 @@ function getFileStat(stat) {
         size: stat.size,
         isdir: stat.isDirectory()
     };
+}
+
+exports.getDetail = path => {
+    path = ROOT + path;
+
+    if (path.endsWith('/')) {
+        path = path.substring(0, path.length - 1);
+    }
+
+    if (!exists(path)) {
+        return path + ' not exists.';
+    }
+
+    let stat = fs.statSync(path);
+    let file = getFileStat(stat);
+    file.path = path.substring(ROOT.length) || '/';
+    if (stat.isDirectory()) {
+        file.children = getChildren(path);
+    }
+
+    return file;
+}
+
+exports.openFile = (path, encoding) => {
+    path = ROOT + path;
+
+    if (!exists(path)) {
+        return path + ' not exists.';
+    }
+
+    let stat = fs.statSync(path);
+    if(stat.size > 1 * 1024 * 1024) {
+        return 'file lager than 1mb';
+    }
+
+    let data = fs.readFileSync(path, encoding);
+    
+    return data;
 }

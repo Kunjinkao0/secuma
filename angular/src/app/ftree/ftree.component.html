@@ -1,9 +1,4 @@
 <div *ngIf="file">
-  <span id="toppath">{{ file.path }}</span>
-  <span id="topdesc">{{file.children.length}}个文件：</span>
-
-  <hr />
-
   <ul>
     <li *ngIf="ROOT != file.path">
       <a href="javascript:void(0);" (click)="onUpFolderClick()">

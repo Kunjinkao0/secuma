@@ -1,15 +1,15 @@
 <div id="container">
-  <div id="ftitle" *ngIf="currentDir">
-    <span id="fsize">{{ currentDir.children.length }} file(s) in </span>
-    <span id="fpath">{{ currentDir.path }}</span>
-  </div>
+    <div id="ftitle" *ngIf="currentDir">
+        <span id="fsize">{{ currentDir.children.length }} file(s) in </span>
+        <span id="fpath">{{ currentDir.path }}</span>
+    </div>
 
-  <div id="workspace">
-      <div id="leftpanel">
-          <ftree (onCurrentDirOpen)="onCurrentDirOpen($event)"></ftree>
-      </div>
-      <div id="rightpanel">
-          <textarea>aaa</textarea>
-      </div>
-  </div>
+    <div id="workspace">
+        <div id="leftpanel">
+            <ftree (dirOpenEvent)="onDirOpen($event)" (fileOpenEvent)="fedit.openFile($event)"></ftree>
+        </div>
+        <div id="rightpanel">
+            <fedit #fedit></fedit>
+        </div>
+    </div>
 </div>

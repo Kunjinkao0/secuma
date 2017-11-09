@@ -11,7 +11,8 @@ import { FTreeService } from '../provider/ftree.service';
 export class FTreeComponent implements OnInit {
   file: ZFile;
   ROOT = '/';
-  @Output() currentDirOpenEvent = new EventEmitter<ZFile>();
+  @Output() dirOpenEvent: EventEmitter<ZFile> = new EventEmitter<ZFile>();
+  @Output() fileOpenEvent: EventEmitter<ZFile> = new EventEmitter<ZFile>();
 
   constructor(
     private ftreeService: FTreeService
@@ -22,8 +23,10 @@ export class FTreeComponent implements OnInit {
   }
 
   getZFileDetail(path: string): void {
-    this.ftreeService.getZFileDetail(path).then(file => {
+    this.ftreeService.openDir(path).then(file => {
       this.file = file;
+
+      this.onDirOpen();
     });
   }
 
@@ -31,7 +34,7 @@ export class FTreeComponent implements OnInit {
     if (f.isDirectory) {
       this.getZFileDetail(f.path);
     } else {
-      console.log('open file: ' + f.path);
+      this.onFileOpen(f);
     }
   }
 
@@ -41,7 +44,7 @@ export class FTreeComponent implements OnInit {
   }
 
   getUpperPath(path: string): string {
-    if(path.endsWith('/')) {
+    if (path.endsWith('/')) {
       path = path.substr(0, path.length - 1);
     }
 
@@ -52,7 +55,11 @@ export class FTreeComponent implements OnInit {
     return path;
   }
 
-  onCurrentDirOpen(file: ZFile): void {
-    this.currentDirOpenEvent.emit(file);
+  onDirOpen() {
+    this.dirOpenEvent.emit(this.file);
+  }
+
+  onFileOpen(f: ZFile) {
+    this.fileOpenEvent.emit(f);
   }
 }

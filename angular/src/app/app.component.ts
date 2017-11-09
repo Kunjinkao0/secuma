@@ -9,10 +9,9 @@ import { ZFile } from './zfile';
 })
 export class AppComponent {
   title = 'app';
-
   currentDir: ZFile;
 
-  onCurrentDirOpen(f: ZFile) {
+  onDirOpen(f: ZFile) {
     this.currentDir = f;
   }
 }

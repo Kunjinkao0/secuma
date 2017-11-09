@@ -30,7 +30,7 @@ var index = require('./routes/index');
 var zdir = require('./routes/zdir');
 
 app.use('/', index);
-app.use('/getdir', zdir);
+app.use('/secuma', zdir);
 
 // // catch 404 and forward to error handler
 // app.use(function(req, res, next) {

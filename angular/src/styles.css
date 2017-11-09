@@ -9,8 +9,6 @@ body {
     height: 100vh;
     flex-direction: column;
     font-family: Courier New, Courier, monospace;
-    overflow-x: hidden;
-    overflow-y: hidden;
 }
 
 main {
@@ -19,6 +17,7 @@ main {
     display: flex;
     flex-flow: column nowrap;
     align-items: stretch;
+    padding: 4px;
 }
 
 app-root {

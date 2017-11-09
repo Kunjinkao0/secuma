@@ -4,15 +4,17 @@ import { Headers, Http } from '@angular/http';
 import { ZFile } from '../zfile';
 import 'rxjs/add/operator/toPromise';
 
+const API = 'http://localhost:3000/secuma';
+
 @Injectable()
 export class FTreeService {
 
   constructor(private http: Http) { }
 
-  getZFileDetail(path: string): Promise<ZFile> {
+  openDir(path: string): Promise<ZFile> {
     // simply replace '/' to /%2f
     path = path.replace(/\//g, '%2f');
-    let url = 'http://localhost:3000/getdir?dpath=' + path;
+    let url = API + '/dir?fpath=' + path;
     return new Promise<ZFile>((resolve, reject) => {
       this.http.get(url).toPromise().then(res => {
         let fs = this.mapping(res.json());
@@ -20,7 +22,6 @@ export class FTreeService {
       });
     });
   }
-
 
   mapping(json: any): ZFile {
     let children: ZFile[] = [];
@@ -49,27 +50,14 @@ export class FTreeService {
     return file;
   }
 
-  mockData(): ZFile {
-    let children: ZFile[] = [];
-    let seed = Math.random();
-    for (let i = 0; i < 10; i++) {
-      children.push({
-        name: 'File' + ((i + 1) * seed),
-        size: 1000 + i,
-        path: '/work',
-        isDirectory: i % 3 == 0,
-        ctime: 66666666,
-        mtime: 66666666
+  openFile(path: string, encoding: string): Promise<any> {
+    // simply replace '/' to /%2f
+    path = path.replace(/\//g, '%2f');
+    let url = API + '/open?fpath=' + path + '&encoding=' + encoding;
+    return new Promise<any>((resolve, reject) => {
+      this.http.get(url).toPromise().then(res => {
+        resolve(res.json());
       });
-    }
-
-    let file = {
-      path: '/work/',
-      name: 'FFFFIIIILLLEEEE',
-      size: 123123,
-      isDirectory: true,
-      children: children
-    };
-    return file;
+    });
   }
 }
