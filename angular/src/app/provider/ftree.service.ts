@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Headers, Http } from '@angular/http';
 
-import { ZFile } from './zfile';
+import { ZFile } from '../zfile';
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()

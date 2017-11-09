@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
-import { ZFile } from './zfile';
-import { FTreeService } from './ftree.service';
+import { ZFile } from '../zfile';
+import { FTreeService } from '../provider/ftree.service';
 
 @Component({
   selector: 'ftree',
@@ -11,6 +11,7 @@ import { FTreeService } from './ftree.service';
 export class FTreeComponent implements OnInit {
   file: ZFile;
   ROOT = '/';
+  @Output() currentDirOpenEvent = new EventEmitter<ZFile>();
 
   constructor(
     private ftreeService: FTreeService
@@ -49,5 +50,9 @@ export class FTreeComponent implements OnInit {
     path = path.substr(0, path.length - basename.length);
 
     return path;
+  }
+
+  onCurrentDirOpen(file: ZFile): void {
+    this.currentDirOpenEvent.emit(file);
   }
 }

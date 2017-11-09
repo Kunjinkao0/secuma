@@ -1,0 +1,41 @@
+#container {
+    display: flex;
+    flex-flow: column;
+    flex: 1 1 auto;
+}
+
+#ftitle {
+    flex: 0 0 2em;
+    padding-top: 4px;
+}
+
+#fpath {
+    font-size: 1.5em;
+    color: rgb(150, 0, 0);
+}
+
+#workspace {
+    flex: 1 1 auto;
+    display: flex;
+    flex-flow: row;
+}
+
+#leftpanel {
+    flex: 0 1 200px;
+    display: flex;
+}
+
+ftree {
+    flex: 1 1 auto;
+}
+
+#rightpanel {
+    flex: 1 1 auto;
+    display: flex;
+}
+
+textarea {
+    width: 100%;
+    flex: 1 1 auto;
+    resize: none;
+}

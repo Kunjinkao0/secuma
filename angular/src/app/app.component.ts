@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 
+import { ZFile } from './zfile';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -7,4 +9,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'app';
+
+  currentDir: ZFile;
+
+  onCurrentDirOpen(f: ZFile) {
+    this.currentDir = f;
+  }
 }

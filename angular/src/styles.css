@@ -1,1 +1,32 @@
-/* You can add global styles to this file, and also import other style files */
+*, html, body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    min-height: 100vh;
+    height: 100vh;
+    flex-direction: column;
+    font-family: Courier New, Courier, monospace;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+main {
+    flex: 1 0 auto;
+    background: gainsboro;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: stretch;
+}
+
+app-root {
+    flex: 1 1 auto;
+    display: flex;
+}
+
+header, footer {
+    background: #AAA;
+    text-align: center;
+}
