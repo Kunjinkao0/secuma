@@ -27,7 +27,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 var index = require('./routes/index');
-var zdir = require('./routes/zdir');
+var zdir = require('./secuma/dirapi');
 
 app.use('/', index);
 app.use('/secuma', zdir);
