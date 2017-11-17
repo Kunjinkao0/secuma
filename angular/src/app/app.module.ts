@@ -8,12 +8,13 @@ import { FTreeService } from './provider/ftree.service';
 import { GetFileName, ByteFormat } from './provider/fformat.pipe';
 import { FtitleComponent } from './ftitle/ftitle.component';
 import { FeditComponent } from './fedit/fedit.component';
+import { CMenuComponent } from './cmenu/cmenu.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     FTreeComponent,
-    GetFileName, ByteFormat, FtitleComponent, FeditComponent
+    GetFileName, ByteFormat, FtitleComponent, FeditComponent, CMenuComponent
   ],
   imports: [
     BrowserModule,

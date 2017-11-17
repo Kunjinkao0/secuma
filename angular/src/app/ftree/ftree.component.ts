@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 import { ZFile } from '../zfile';
 import { FTreeService } from '../provider/ftree.service';
+import { CMenu } from '../cmenu/cmenu';
 
 @Component({
   selector: 'ftree',
@@ -13,7 +14,8 @@ export class FTreeComponent implements OnInit {
   ROOT = '/';
   @Output() dirOpenEvent: EventEmitter<ZFile> = new EventEmitter<ZFile>();
   @Output() fileOpenEvent: EventEmitter<ZFile> = new EventEmitter<ZFile>();
-
+  @Output() contextMenuClickEvent: EventEmitter<CMenu> = new EventEmitter<CMenu>();
+ 
   constructor(
     private ftreeService: FTreeService
   ) { }
@@ -62,4 +64,17 @@ export class FTreeComponent implements OnInit {
   onFileOpen(f: ZFile) {
     this.fileOpenEvent.emit(f);
   }
+
+  onContextMenuClick(event, f) {
+    event.returnValue = false;
+    let menu = CMenu.simpleCMenu(event.clientX, event.clientY, MENU);
+    menu.onItemClickListener = {
+      onItemClicked: item => {
+        console.log(item);
+      }
+    }
+    this.contextMenuClickEvent.emit(menu);
+  }
 }
+
+const MENU = ['Copy', 'Paste', 'New File', 'New Folder'];

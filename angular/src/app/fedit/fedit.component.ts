@@ -22,7 +22,7 @@ export class FeditComponent implements OnInit {
     let path = f.path;
     this.ftreeService.openFile(path, 'utf-8').then(res => {
       console.log(res);
-      this.content = res;
+      this.content = res.data;
     });
   }
 }

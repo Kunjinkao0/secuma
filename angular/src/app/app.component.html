@@ -6,10 +6,18 @@
 
     <div id="workspace">
         <div id="leftpanel">
-            <ftree (dirOpenEvent)="onDirOpen($event)" (fileOpenEvent)="fedit.openFile($event)"></ftree>
+            <ftree 
+                (dirOpenEvent)="onDirOpen($event)" 
+                (fileOpenEvent)="fedit.openFile($event)"
+                (contextMenuClickEvent)="showContextMenu($event)"
+                ></ftree>
         </div>
         <div id="rightpanel">
             <fedit #fedit></fedit>
         </div>
+    </div>
+
+    <div class="cover" (click)="coverClick()" [hidden]="!coverShow">
+        <cmenu #contextmenu></cmenu>
     </div>
 </div>

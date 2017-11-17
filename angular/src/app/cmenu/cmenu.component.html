@@ -1,0 +1,9 @@
+<div class="cover-wrapper">
+  <div id="ctxmenu" [style.left]="style.left + 'px'" [style.top]="style.top + 'px'">
+    <ul class="items">
+      <li *ngFor="let item of cmenu.items" (click)="onMenuItemClick(item)">
+        <span>{{ item.name }}</span>
+      </li>
+    </ul>
+  </div>
+</div>

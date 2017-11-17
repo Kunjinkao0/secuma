@@ -1,18 +1,18 @@
 <div *ngIf="file">
   <ul>
-    <li *ngIf="ROOT != file.path">
+    <li *ngIf="ROOT != file.path" class="fitem">
       <a href="javascript:void(0);" (click)="onUpFolderClick()">
         ...
       </a>
     </li>
-    <li *ngFor="let f of file.children">
+    <li *ngFor="let f of file.children" class="fitem" (contextmenu)="onContextMenuClick($event, f)">
       <span class="fname">
         <a href="javascript:void(0);" (click)="onItemClick(f)">
           <span>{{ f.name | basename }}</span>
         </a>
       </span>
-      <span class="fsize">size:{{ f.size | bformat }}</span>
-      <span class="fmtime">m:{{ f.ctime | date: 'HH:mm' }}</span>
+      <!-- <span class="fsize">size:{{ f.size | bformat }}</span>
+      <span class="fmtime">m:{{ f.ctime | date: 'HH:mm' }}</span> -->
     </li>
   </ul>
 </div>
