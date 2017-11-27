@@ -9,6 +9,7 @@ import { ZFile } from '../zfile';
   styleUrls: ['./fedit.component.css']
 })
 export class FeditComponent implements OnInit {
+  currFile: ZFile;
   content: string;
 
   constructor(
@@ -19,10 +20,22 @@ export class FeditComponent implements OnInit {
   }
 
   openFile(f: ZFile) {
-    let path = f.path;
-    this.ftreeService.openFile(path, 'utf-8').then(res => {
-      console.log(res);
+    this.currFile = f;
+    this.ftreeService.openFile(this.currFile.path, 'utf-8').then(res => {
       this.content = res.data;
     });
+  }
+
+  onSaveClicked() {
+    if (!this.currFile) {
+      return;
+    }
+
+    this.ftreeService.writeFile(this.currFile.path, this.content, 'utf-8')
+      .then(res => {
+        if(res.success == 'ok') {
+          // success
+        }
+      });
   }
 }

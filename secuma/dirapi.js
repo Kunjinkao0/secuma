@@ -54,15 +54,16 @@ router.get('/deletefile', function(req, res, next) {
     res.send(JSON.stringify(data));
 });
 
-router.get('/writefile', function(req, res, next) {
-    let fpath = req.query.fpath;
-    let content = req.query.content;
+router.post('/writefile', function(req, res, next) {
+    let fpath = req.body.fpath;
+    let content = req.body.content;
     if(!fpath || !content) {
         res.send('[fpath] and [content] cannot be null');
     }
-    let encoding = req.query.encoding || '';
+    let encoding = req.body.encoding || '';
 
     let data = futils.writeFile(fpath, content, encoding);
+    console.log(data);
     res.send(JSON.stringify(data));
 });
 

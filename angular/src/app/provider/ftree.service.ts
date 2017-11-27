@@ -17,13 +17,13 @@ export class FTreeService {
     let url = API + '/dir?fpath=' + path;
     return new Promise<ZFile>((resolve, reject) => {
       this.http.get(url).toPromise().then(res => {
-        let fs = this.mapping(res.json());
+        let fs = this.parseOpenDir(res.json());
         resolve(fs);
       });
     });
   }
 
-  mapping(json: any): ZFile {
+  parseOpenDir(json: any): ZFile {
     let children: ZFile[] = [];
     if (json.children) {
       json.children.forEach(f => {
@@ -56,6 +56,51 @@ export class FTreeService {
     let url = API + '/open?fpath=' + path + '&encoding=' + encoding;
     return new Promise<any>((resolve, reject) => {
       this.http.get(url).toPromise().then(res => {
+        resolve(res.json());
+      });
+    });
+  }
+
+  createFile(path: string, encoding: string): Promise<any> {
+    // simply replace '/' to /%2f
+    path = path.replace(/\//g, '%2f');
+    let url = API + '/mkfile?fpath=' + path;
+    return new Promise<any>((resolve, reject) => {
+      this.http.get(url).toPromise().then(res => {
+        resolve(res.json());
+      });
+    });
+  }
+
+  mkDir(path: string, encoding: string): Promise<any> {
+    // simply replace '/' to /%2f
+    path = path.replace(/\//g, '%2f');
+    let url = API + '/mkdir?fpath=' + path;
+    return new Promise<any>((resolve, reject) => {
+      this.http.get(url).toPromise().then(res => {
+        resolve(res.json());
+      });
+    });
+  }
+
+  deleteFile(path: string, encoding: string): Promise<any> {
+    // simply replace '/' to /%2f
+    path = path.replace(/\//g, '%2f');
+    let url = API + '/deletefile?fpath=' + path;
+    return new Promise<any>((resolve, reject) => {
+      this.http.get(url).toPromise().then(res => {
+        resolve(res.json());
+      });
+    });
+  }
+
+  writeFile(path: string, content: string, encoding: string): Promise<any> {
+    let url = API + '/writefile';
+    let body = {
+      fpath: path, content: content, encoding: encoding
+    };
+    return new Promise<any>((resolve, reject) => {
+      this.http.post(url, body).toPromise().then(res => {
         resolve(res.json());
       });
     });

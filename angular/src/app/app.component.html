@@ -1,6 +1,6 @@
 <div id="container">
     <div id="ftitle" *ngIf="currentDir">
-        <span id="fsize">{{ currentDir.children.length }} file(s) in </span>
+        <span id="fsize">{{ currentDir.children.length }} file(s) </span>
         <span id="fpath">{{ currentDir.path }}</span>
     </div>
 
@@ -9,8 +9,7 @@
             <ftree 
                 (dirOpenEvent)="onDirOpen($event)" 
                 (fileOpenEvent)="fedit.openFile($event)"
-                (contextMenuClickEvent)="showContextMenu($event)"
-                ></ftree>
+                (contextMenuClickEvent)="showContextMenu($event)"></ftree>
         </div>
         <div id="rightpanel">
             <fedit #fedit></fedit>
