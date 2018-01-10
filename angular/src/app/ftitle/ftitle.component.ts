@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core';
+import { ZFile } from '../zfile';
 
 @Component({
-  selector: 'app-ftitle',
+  selector: 'ftitle',
   templateUrl: './ftitle.component.html',
   styleUrls: ['./ftitle.component.css']
 })
-export class FtitleComponent implements OnInit {
+export class FtitleComponent {
+  currentFile: ZFile;
 
   constructor() { }
 
-  ngOnInit() {
-  }
+  
 
 }

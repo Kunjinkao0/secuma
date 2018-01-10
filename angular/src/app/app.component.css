@@ -4,17 +4,6 @@
     flex: 1 1 auto;
 }
 
-#ftitle {
-    flex: 0 1 2em;
-    padding-top: 0px;
-    border-bottom: solid 1px black;
-}
-
-#fpath {
-    font-size: 1.5em;
-    color: rgb(150, 0, 0);
-}
-
 #workspace {
     flex: 1 1 auto;
     display: flex;
@@ -24,13 +13,13 @@
 #leftpanel {
     flex: 0 1 200px;
     display: flex;
+    background: gainsboro;
 }
 
 ftree {
-    flex: 1 1 auto;   
+    flex: 1 1 auto;
     overflow-x: visible;
     overflow-y: visible;
-    border-right: solid 1px black;
 }
 
 #rightpanel {

@@ -1,0 +1,14 @@
+{
+    "theme-name": "default",
+    "colors": {
+        "font": {
+            "basic": "#000",
+            "ftree": "#000",
+            "ftitle": "#000"
+        },
+        "background": {
+            "basic": "#EEE"
+        }
+    }
+
+}

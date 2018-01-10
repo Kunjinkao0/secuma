@@ -1,22 +1,11 @@
 <div id="container">
-    <div id="ftitle" *ngIf="currentDir">
-        <span id="fsize">{{ currentDir.children.length }} file(s) </span>
-        <span id="fpath">{{ currentDir.path }}</span>
-    </div>
-
     <div id="workspace">
         <div id="leftpanel">
-            <ftree 
-                (dirOpenEvent)="onDirOpen($event)" 
-                (fileOpenEvent)="fedit.openFile($event)"
-                (contextMenuClickEvent)="showContextMenu($event)"></ftree>
+            <ftree #ftree (dirOpenEvent)="onDirOpen($event)" (fileOpenEvent)="fedit.openFile($event)" (contextMenuClickEvent)="showContextMenu($event)"></ftree>
         </div>
+
         <div id="rightpanel">
             <fedit #fedit></fedit>
         </div>
-    </div>
-
-    <div class="cover" (click)="coverClick()" [hidden]="!coverShow">
-        <cmenu #contextmenu></cmenu>
     </div>
 </div>

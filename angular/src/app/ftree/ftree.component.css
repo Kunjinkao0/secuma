@@ -1,42 +1,6 @@
-#topname {
-    color: #bb0009;
-    font-size: 1.5em;
-}
-ul {
-    margin: 0;
-    padding: 0;
-}
-
-li {
-    list-style: none;
-}
-
-#toppath {
-    font-size: 1.5em;
-    color: rgb(200, 0, 0);
-}
-
-#topdesc {
-    font-size: 0.6em;
-    margin: 0 0 0 1em;
-}
-
-.fname {
-    display: inline-block;
-    width: 10em;
-}
-
-.fsize {
-    font-size: 0.8em;
-    color: grey;
-}
-
-.fmtime {
-    font-size: 0.8em;
-    color: grey;
-}
-
-.fitem {
-    height: 1.5em;
-    line-height: 1.5em;
+.ctrlbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 40px;
 }

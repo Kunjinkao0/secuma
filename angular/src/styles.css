@@ -11,9 +11,15 @@ body {
     font-family: Courier New, Courier, monospace;
 }
 
+/* @import "~@angular/material/prebuilt-themes/deeppurple-amber.css"; */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+/* Dark theme */
+/* @import "~@angular/material/prebuilt-themes/pink-bluegrey.css"; */
+/* @import "~@angular/material/prebuilt-themes/purple-green.css"; */
+
 main {
     flex: 1 0 auto;
-    background: gainsboro;
     display: flex;
     flex-flow: column nowrap;
     align-items: stretch;
@@ -25,7 +31,12 @@ app-root {
     display: flex;
 }
 
-header, footer {
-    background: #AAA;
-    text-align: center;
-}
+.noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+      -webkit-user-select: none; /* Safari */
+       -khtml-user-select: none; /* Konqueror HTML */
+         -moz-user-select: none; /* Firefox */
+          -ms-user-select: none; /* Internet Explorer/Edge */
+              user-select: none; /* Non-prefixed version, currently
+                                    supported by Chrome and Opera */
+  }

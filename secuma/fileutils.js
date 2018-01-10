@@ -2,7 +2,7 @@
 const fs = require('fs');
 
 // ROOT path is a 'safe' path to let font end access
-const ROOT = '/Users/willi';
+const ROOT = '/Users/willi/workspace';
 
 function exists(path) {
     try {

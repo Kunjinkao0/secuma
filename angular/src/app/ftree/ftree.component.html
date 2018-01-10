@@ -1,18 +1,21 @@
 <div *ngIf="file">
-  <ul>
-    <li *ngIf="ROOT != file.path" class="fitem">
-      <a href="javascript:void(0);" (click)="onUpFolderClick()">
-        ...
-      </a>
-    </li>
-    <li *ngFor="let f of file.children" class="fitem" (contextmenu)="onContextMenuClick($event, f)">
-      <span class="fname">
-        <a href="javascript:void(0);" (click)="onItemClick(f)">
+  <div class="ctrlbar">
+    <button mat-button class="sm-ctrl" color="primary" (click)="createBtnClicked()">Create</button>
+    <button mat-button class="sm-ctrl" color="primary">Delete</button>
+  </div>
+  <mat-divider></mat-divider>
+  <h5 matSubheader>{{file.path | basename}}/</h5>
+  <mat-divider></mat-divider>
+  <div id="ftree" class="noselect">
+    <mat-nav-list>
+      <mat-list-item *ngIf="ROOT != file.path" (click)="onUpFolderClick()">
+        <span>...</span>
+      </mat-list-item>
+      <mat-list-item *ngFor="let f of file.children" (click)="onItemClick(f)" (contextmenu)="onContextMenuClick($event, f)">
+        <span class="fname">
           <span>{{ f.name | basename }}</span>
-        </a>
-      </span>
-      <!-- <span class="fsize">size:{{ f.size | bformat }}</span>
-      <span class="fmtime">m:{{ f.ctime | date: 'HH:mm' }}</span> -->
-    </li>
-  </ul>
+        </span>
+      </mat-list-item>
+    </mat-nav-list>
+  </div>
 </div>
