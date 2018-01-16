@@ -4,3 +4,23 @@
     justify-content: space-around;
     height: 40px;
 }
+
+#ftree {
+  overflow-y: auto;
+  overflow-x: auto;
+}
+
+#path-control {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 2px;
+}
+
+#path-control h6 {
+  flex: 1 0 auto;
+}
+
+#path-control mat-icon {
+  font-size: 1.1em;
+}

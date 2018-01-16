@@ -1,4 +1,4 @@
-<div id="fedit">
+<div id="fedit" *ngIf="content">
   <div id="top-control">
     <div id="function">
       <button class="sm-matbtn" mat-raised-button color="primary" (click)="onSaveClicked()">Save</button>
@@ -6,7 +6,7 @@
     </div>
   </div>
   <mat-divider></mat-divider>
-  <div id="edit-area" *ngIf="content">
+  <div id="edit-area">
     <textarea>{{ content }}</textarea>
   </div>
 </div>

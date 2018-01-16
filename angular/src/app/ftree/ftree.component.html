@@ -1,17 +1,21 @@
 <div *ngIf="file">
   <div class="ctrlbar">
     <button mat-button class="sm-ctrl" color="primary" (click)="createBtnClicked()">Create</button>
-    <button mat-button class="sm-ctrl" color="primary">Delete</button>
+    <button mat-button class="sm-ctrl" color="primary">Open</button>
   </div>
   <mat-divider></mat-divider>
-  <h5 matSubheader>{{file.path | basename}}/</h5>
+  <div id="path-control">
+    <h6 matSubheader>{{file.path | basename}}/</h6>
+    <button mat-icon-button color="primary" *ngIf="ROOT != file.path" (click)="onUpFolderClick()">
+      <mat-icon>arrow_upward</mat-icon>
+    </button>
+  </div>
   <mat-divider></mat-divider>
-  <div id="ftree" class="noselect">
+  <div id="ftree" class="noselect" [style.max-height]="maxListHeight">
     <mat-nav-list>
-      <mat-list-item *ngIf="ROOT != file.path" (click)="onUpFolderClick()">
-        <span>...</span>
-      </mat-list-item>
-      <mat-list-item *ngFor="let f of file.children" (click)="onItemClick(f)" (contextmenu)="onContextMenuClick($event, f)">
+      <mat-list-item *ngFor="let f of file.children"
+                     (click)="onItemClick(f)"
+                     (contextmenu)="onContextMenuClick($event, f)">
         <span class="fname">
           <span>{{ f.name | basename }}</span>
         </span>

@@ -1,14 +1,14 @@
 *, html, body {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-    display: flex;
-    min-height: 100vh;
-    height: 100vh;
-    flex-direction: column;
-    font-family: Courier New, Courier, monospace;
+  display: flex;
+  min-height: 100vh;
+  height: 100vh;
+  flex-direction: column;
+  font-family: Courier New, Courier, monospace;
 }
 
 /* @import "~@angular/material/prebuilt-themes/deeppurple-amber.css"; */
@@ -19,24 +19,40 @@ body {
 /* @import "~@angular/material/prebuilt-themes/purple-green.css"; */
 
 main {
-    flex: 1 0 auto;
-    display: flex;
-    flex-flow: column nowrap;
-    align-items: stretch;
-    padding: 4px;
+  flex: 1 0 auto;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: stretch;
+  padding: 4px;
 }
 
 app-root {
-    flex: 1 1 auto;
-    display: flex;
+  flex: 1 1 auto;
+  display: flex;
 }
 
 .noselect {
-    -webkit-touch-callout: none; /* iOS Safari */
-      -webkit-user-select: none; /* Safari */
-       -khtml-user-select: none; /* Konqueror HTML */
-         -moz-user-select: none; /* Firefox */
-          -ms-user-select: none; /* Internet Explorer/Edge */
-              user-select: none; /* Non-prefixed version, currently
-                                    supported by Chrome and Opera */
-  }
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none;
+  /* Non-prefixed version, currently
+                                     supported by Chrome and Opera */
+}
+
+/* TODO: need to change into color-primary */
+::-webkit-scrollbar {
+  width: 8px;
+  background: #CCC;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 2px;
+  background: #888;
+}

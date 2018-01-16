@@ -1,31 +1,46 @@
-import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
-import { Inject } from '@angular/core';
+import {Component, OnInit, Output, EventEmitter, ViewChild, ViewContainerRef, AfterViewInit} from '@angular/core';
+import {Inject} from '@angular/core';
 
-import { ZFile } from '../zfile';
-import { FTreeService } from '../provider/ftree.service';
-import { CMenu } from '../cmenu/cmenu';
-import { MatMenuTrigger } from '@angular/material';
+import {ZFile} from '../zfile';
+import {FTreeService} from '../provider/ftree.service';
+import {CdkOverlayOrigin, Overlay, OverlayConfig} from '@angular/cdk/overlay';
+import {CdkPortal, ComponentPortal, Portal} from '@angular/cdk/portal';
 
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 
 @Component({
   selector: 'ftree',
   templateUrl: './ftree.component.html',
   styleUrls: ['./ftree.component.css']
 })
-export class FTreeComponent implements OnInit {
+export class FTreeComponent implements OnInit, AfterViewInit {
   file: ZFile;
   ROOT = '/';
   @Output() dirOpenEvent: EventEmitter<ZFile> = new EventEmitter<ZFile>();
   @Output() fileOpenEvent: EventEmitter<ZFile> = new EventEmitter<ZFile>();
 
-  constructor(
-    private ftreeService: FTreeService,
-    public dialog: MatDialog
-  ) { }
+  constructor(private ftreeService: FTreeService,
+              public dialog: MatDialog,
+              public overlay: Overlay, public viewContainerRef: ViewContainerRef) {
+  }
 
   ngOnInit() {
     this.getZFileDetail(this.ROOT);
+  }
+
+  ngAfterViewInit() {
+    this.calListHeight();
+  }
+
+  maxListHeight: string;
+  maxListWidth: string;
+
+  calListHeight() {
+    let h = document.body.clientHeight - 98;
+    this.maxListHeight = `${h}px`;
+
+    let w = 200;
+    this.maxListWidth = `${w}px`;
   }
 
   getZFileDetail(path: string): void {
@@ -78,7 +93,7 @@ export class FTreeComponent implements OnInit {
   createBtnClicked() {
     let dialogRef = this.dialog.open(NewFileDialog, {
       width: '250px',
-      data: { fname: '' }
+      data: {fname: ''}
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -86,32 +101,72 @@ export class FTreeComponent implements OnInit {
     });
   }
 
-  // onContextMenuClick(event, f) {
-  //   event.preventDefault();
-  // }
+  onContextMenuClick(e: MouseEvent, f: ZFile) {
+    e.preventDefault();
+
+    let config = new OverlayConfig({
+      hasBackdrop: true,
+      backdropClass: 'cdk-overlay-transparent-backdrop'
+    });
+
+    config.positionStrategy = this.overlay.position()
+      .global()
+      .left(`${e.clientX}px`)
+      .top(`${e.clientY}px`);
+
+    let overlayRef = this.overlay.create(config);
+    overlayRef.attach(new ComponentPortal(ContextMenuPanel, this.viewContainerRef));
+    overlayRef.backdropClick().subscribe(() => overlayRef.detach());
+  }
 }
 
 @Component({
   selector: 'dialog-overview-example-dialog',
-  template: `  
-  <h1 mat-dialog-title>Enter the file name:</h1>
-  <div mat-dialog-content>
-    <mat-form-field>
-      <input matInput [(ngModel)]="data.fname">
-    </mat-form-field>
-  </div>
-  <div mat-dialog-actions>
-    <button mat-button [mat-dialog-close]="data.fname" [disabled]="!data.fname">Ok</button>
-    <button mat-button (click)="onNoClick()">Cancel</button>
-  </div>`,
+  template: `
+    <h1 mat-dialog-title>Enter the file name:</h1>
+    <div mat-dialog-content>
+      <mat-form-field>
+        <input matInput [(ngModel)]="data.fname">
+      </mat-form-field>
+    </div>
+    <div mat-dialog-actions>
+      <button mat-button [mat-dialog-close]="data.fname" [disabled]="!data.fname">Ok</button>
+      <button mat-button (click)="onNoClick()">Cancel</button>
+    </div>`,
 })
 export class NewFileDialog {
 
-  constructor(
-    public dialogRef: MatDialogRef<NewFileDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: any) { }
+  constructor(public dialogRef: MatDialogRef<NewFileDialog>,
+              @Inject(MAT_DIALOG_DATA) public data: any) {
+  }
 
   onNoClick(): void {
     this.dialogRef.close();
   }
+}
+
+/** Simple component to load into an overlay */
+@Component({
+  moduleId: module.id,
+  selector: 'rotini-panel',
+  template: `
+    <mat-nav-list class="noselect" id="menu">
+      <mat-list-item (contextmenu)="$event.preventDefault()">
+        <span>New File</span>
+      </mat-list-item>
+      <mat-list-item (contextmenu)="$event.preventDefault()">
+        <span>Delete File</span>
+      </mat-list-item>
+    </mat-nav-list>
+  `,
+  styles: [`
+    #menu {
+      background: white;
+      border-radius: 2px;
+      box-shadow: 1px 1px 2px #CCC;
+    }
+  `]
+})
+export class ContextMenuPanel {
+  value: number = 9000;
 }

@@ -1,8 +1,6 @@
 import { Component, ViewChild, AfterViewInit } from '@angular/core';
 
 import { ZFile } from './zfile';
-import { CMenuComponent } from './cmenu/cmenu.component';
-import { CMenu } from './cmenu/cmenu';
 import { FileUtils } from './provider/file.utils';
 import { FTreeComponent } from './ftree/ftree.component';
 import { FeditComponent } from './fedit/fedit.component';
@@ -18,7 +16,6 @@ export class AppComponent implements AfterViewInit {
 
   @ViewChild('ftree') ftree: FTreeComponent;
   @ViewChild('fedit') fedit: FeditComponent;
-  @ViewChild('contextmenu') contextMenu: CMenuComponent;
 
   coverShow = false;
 
