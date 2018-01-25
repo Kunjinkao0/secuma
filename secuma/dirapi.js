@@ -2,19 +2,23 @@
 
 const express = require('express');
 const router = express.Router();
+const path = require('path');
 
 const futils = require('./fileutils');
+router.get('/', function (req, res, next) {
+    res.sendFile(path.join(__dirname, '../public/secumadist/index.html'));
+});
 
-router.get('/dir', function(req, res, next) {
+router.get('/dir', function (req, res, next) {
     let fpath = req.query.fpath || '/';
 
     let detail = futils.getDetail(fpath);
     res.send(JSON.stringify(detail));
 });
 
-router.get('/open', function(req, res, next) {
+router.get('/open', function (req, res, next) {
     let fpath = req.query.fpath;
-    if(!fpath) {
+    if (!fpath) {
         res.send('[fpath] cannot be null');
     }
     let encoding = req.query.encoding || 'utf-8';
@@ -23,9 +27,9 @@ router.get('/open', function(req, res, next) {
     res.send(JSON.stringify(data));
 });
 
-router.get('/mkdir', function(req, res, next) {
+router.get('/mkdir', function (req, res, next) {
     let fpath = req.query.fpath;
-    if(!fpath) {
+    if (!fpath) {
         res.send('[fpath] cannot be null');
     }
 
@@ -33,9 +37,9 @@ router.get('/mkdir', function(req, res, next) {
     res.send(JSON.stringify(data));
 });
 
-router.get('/mkfile', function(req, res, next) {
+router.get('/mkfile', function (req, res, next) {
     let fpath = req.query.fpath;
-    if(!fpath) {
+    if (!fpath) {
         res.send('[fpath] cannot be null');
     }
 
@@ -43,9 +47,9 @@ router.get('/mkfile', function(req, res, next) {
     res.send(JSON.stringify(data));
 });
 
-router.get('/deletefile', function(req, res, next) {
+router.get('/deletefile', function (req, res, next) {
     let fpath = req.query.fpath;
-    if(!fpath) {
+    if (!fpath) {
         res.send('[fpath] cannot be null');
     }
     let encoding = req.query.encoding || '';
@@ -54,10 +58,10 @@ router.get('/deletefile', function(req, res, next) {
     res.send(JSON.stringify(data));
 });
 
-router.post('/writefile', function(req, res, next) {
+router.post('/writefile', function (req, res, next) {
     let fpath = req.body.fpath;
     let content = req.body.content;
-    if(!fpath || !content) {
+    if (!fpath || !content) {
         res.send('[fpath] and [content] cannot be null');
     }
     let encoding = req.body.encoding || '';

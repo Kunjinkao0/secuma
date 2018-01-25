@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
-import { FTreeService } from '../provider/ftree.service';
+import { FileService } from '../provider/file.service';
 import { ZFile } from '../zfile';
 
 @Component({
@@ -13,7 +13,7 @@ export class FeditComponent implements OnInit {
   content: string;
 
   constructor(
-    private ftreeService: FTreeService
+    private fileService: FileService
   ) { }
 
   ngOnInit() {
@@ -21,7 +21,7 @@ export class FeditComponent implements OnInit {
 
   openFile(f: ZFile) {
     this.currFile = f;
-    this.ftreeService.openFile(this.currFile.path, 'utf-8').then(res => {
+    this.fileService.openFile(this.currFile.path, 'utf-8').subscribe(res => {
       this.content = res.data;
     });
   }
@@ -31,9 +31,9 @@ export class FeditComponent implements OnInit {
       return;
     }
 
-    this.ftreeService.writeFile(this.currFile.path, this.content, 'utf-8')
-      .then(res => {
-        if(res.success == 'ok') {
+    this.fileService.writeFile(this.currFile.path, this.content, 'utf-8')
+      .subscribe(res => {
+        if (res.success == 'ok') {
           // success
         }
       });

@@ -1,7 +1,7 @@
 import { Component, ViewChild, AfterViewInit } from '@angular/core';
 
 import { ZFile } from './zfile';
-import { FileUtils } from './provider/file.utils';
+import { FileService } from './provider/file.service';
 import { FTreeComponent } from './ftree/ftree.component';
 import { FeditComponent } from './fedit/fedit.component';
 
@@ -9,7 +9,7 @@ import { FeditComponent } from './fedit/fedit.component';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  providers: [FileUtils]
+  providers: [FileService]
 })
 export class AppComponent implements AfterViewInit {
   currentDir: ZFile;
@@ -19,7 +19,7 @@ export class AppComponent implements AfterViewInit {
 
   coverShow = false;
 
-  constructor(private futils: FileUtils) { }
+  constructor(private futils: FileService) { }
 
   onDirOpen(f: ZFile) {
     this.currentDir = f;
@@ -34,10 +34,10 @@ export class AppComponent implements AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.futils.readFile('assets/config/settings.json').then(res => {
-      let settings = JSON.parse(res._body); // why _body??
-      this.initialViewSettings(settings);
-    });
+    // this.futils.readFile('assets/config/settings.json').subscribe(res => {
+    //   let settings = JSON.parse(res._body); // why _body??
+    //   this.initialViewSettings(settings);
+    // });
   }
 
   private viewSettings;

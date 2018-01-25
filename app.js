@@ -9,6 +9,11 @@ var cors = require('cors');
 var app = express();
 app.use(cors());
 
+var basicAuth = require('express-basic-auth');
+app.use(basicAuth({
+    users: { 'admin': 'supersecret' }
+}));
+
 // allow cross origin access
 // app.all('*',function(req,res,next){
 // 	res.header("Access-Control-Allow-Origin","*");

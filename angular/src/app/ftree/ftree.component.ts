@@ -1,12 +1,12 @@
-import {Component, OnInit, Output, EventEmitter, ViewChild, ViewContainerRef, AfterViewInit} from '@angular/core';
-import {Inject} from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild, ViewContainerRef, AfterViewInit } from '@angular/core';
+import { Inject } from '@angular/core';
 
-import {ZFile} from '../zfile';
-import {FTreeService} from '../provider/ftree.service';
-import {CdkOverlayOrigin, Overlay, OverlayConfig} from '@angular/cdk/overlay';
-import {CdkPortal, ComponentPortal, Portal} from '@angular/cdk/portal';
+import { ZFile } from '../zfile';
+import { FileService } from '../provider/file.service';
+import { CdkOverlayOrigin, Overlay, OverlayConfig } from '@angular/cdk/overlay';
+import { CdkPortal, ComponentPortal, Portal } from '@angular/cdk/portal';
 
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
   selector: 'ftree',
@@ -19,9 +19,9 @@ export class FTreeComponent implements OnInit, AfterViewInit {
   @Output() dirOpenEvent: EventEmitter<ZFile> = new EventEmitter<ZFile>();
   @Output() fileOpenEvent: EventEmitter<ZFile> = new EventEmitter<ZFile>();
 
-  constructor(private ftreeService: FTreeService,
-              public dialog: MatDialog,
-              public overlay: Overlay, public viewContainerRef: ViewContainerRef) {
+  constructor(private fileService: FileService,
+    public dialog: MatDialog,
+    public overlay: Overlay, public viewContainerRef: ViewContainerRef) {
   }
 
   ngOnInit() {
@@ -50,8 +50,8 @@ export class FTreeComponent implements OnInit, AfterViewInit {
   }
 
   _getZFileDetail(path: string): void {
-    this.ftreeService.openDir(path).then(file => {
-      this.file = file;
+    this.fileService.openDir(path).subscribe(data => {
+      this.file = data;
 
       this.onDirOpen();
     });
@@ -93,7 +93,7 @@ export class FTreeComponent implements OnInit, AfterViewInit {
   createBtnClicked() {
     let dialogRef = this.dialog.open(NewFileDialog, {
       width: '250px',
-      data: {fname: ''}
+      data: { fname: '' }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -137,7 +137,7 @@ export class FTreeComponent implements OnInit, AfterViewInit {
 export class NewFileDialog {
 
   constructor(public dialogRef: MatDialogRef<NewFileDialog>,
-              @Inject(MAT_DIALOG_DATA) public data: any) {
+    @Inject(MAT_DIALOG_DATA) public data: any) {
   }
 
   onNoClick(): void {
