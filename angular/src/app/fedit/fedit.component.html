@@ -2,11 +2,11 @@
   <div id="top-control">
     <div id="function">
       <button class="sm-matbtn" mat-raised-button color="primary" (click)="onSaveClicked()">Save</button>
-      <button class="sm-matbtn" mat-raised-button color="primary">Close</button>
+      <button class="sm-matbtn" mat-raised-button color="primary" disabled>Close</button>
     </div>
   </div>
   <mat-divider></mat-divider>
   <div id="edit-area">
-    <textarea>{{ content }}</textarea>
+    <textarea [(ngModel)]="content"></textarea>
   </div>
 </div>
