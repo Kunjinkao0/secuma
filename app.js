@@ -1,30 +1,13 @@
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var cors = require('cors');
+const express = require('express');
+const app = express();
+const path = require('path');
+const favicon = require('serve-favicon');
+const logger = require('morgan');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const cors = require('cors');
 
-var app = express();
 app.use(cors());
-
-var basicAuth = require('express-basic-auth');
-app.use(basicAuth({
-    users: { 'admin': 'qqqqqq' }
-}));
-
-// allow cross origin access
-// app.all('*',function(req,res,next){
-// 	res.header("Access-Control-Allow-Origin","*");
-// 	res.header("Access-Control-Allow-Headers","Origin, X-Requested-With, Content-Type");
-// 	res.header("Access-Control-Allow-Methods","POST,GET");
-// 	// res.header("X-Powered-By","3.2.1");
-// 	// res.header("Content-Type","application/json;charset=utf-8");
-// 	// res.header("Content-Type", "text/html;charset=utf-8");
-// 	next();
-// });
-
 
 // uncomment after placing your favicon in /public
 app.use(bodyParser.json());

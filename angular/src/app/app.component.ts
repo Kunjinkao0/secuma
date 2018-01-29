@@ -82,7 +82,7 @@ export class AppComponent implements OnInit, AfterViewInit {
         <input matInput [(ngModel)]="data.password" placeholder="Password">
       </mat-form-field>
     </div>
-    <button mat-button (click)="onLoginBtnClick()" style="width: 200px" [disabled]="!data.username || !data.password">Login</button>
+    <button mat-raised-button color="primary" (click)="onLoginBtnClick()" style="width: 200px" [disabled]="!data.username || !data.password">Login</button>
       `,
 })
 export class LoginDialog {

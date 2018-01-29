@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 
 import { ZFile } from '../zfile';
-import 'rxjs/add/operator/toPromise';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
+import 'rxjs/add/operator/catch';
 
-const API = 'http://localhost:3000/secuma';
+const BASE_URL = '/secuma'
+const API = BASE_URL + '/api';
 
 @Injectable()
 export class FileService {
