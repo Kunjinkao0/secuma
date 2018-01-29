@@ -5,7 +5,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import 'rxjs/add/operator/catch';
 
-const BASE_URL = '/secuma'
+const BASE_URL = 'http://localhost:3000/secuma'
 const API = BASE_URL + '/api';
 
 @Injectable()
