@@ -9,6 +9,10 @@ router.get('/', function (req, res, next) {
     res.sendFile(path.join(__dirname, '../public/secumadist/index.html'));
 });
 
+router.post('/login', function (req, res, next) {
+    res.send({res: 'success'});
+});
+
 router.get('/dir', function (req, res, next) {
     let fpath = req.query.fpath || '/';
 

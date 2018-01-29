@@ -25,7 +25,9 @@ export class FTreeComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    this.getZFileDetail(this.ROOT);
+    if (localStorage.getItem('token')) {
+      this.getZFileDetail(this.ROOT);
+    }
   }
 
   ngAfterViewInit() {
@@ -121,7 +123,7 @@ export class FTreeComponent implements OnInit, AfterViewInit {
 }
 
 @Component({
-  selector: 'dialog-overview-example-dialog',
+  selector: 'dialog-new-file',
   template: `
     <h1 mat-dialog-title>Enter the file name:</h1>
     <div mat-dialog-content>
@@ -148,7 +150,7 @@ export class NewFileDialog {
 /** Simple component to load into an overlay */
 @Component({
   moduleId: module.id,
-  selector: 'rotini-panel',
+  selector: 'ftree-ctx-menu',
   template: `
     <mat-nav-list class="noselect" id="menu">
       <mat-list-item (contextmenu)="$event.preventDefault()">

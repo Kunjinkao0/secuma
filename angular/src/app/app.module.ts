@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
-import { AppComponent } from './app.component';
+import { AppComponent, LoginDialog } from './app.component';
 import { ContextMenuPanel, FTreeComponent, NewFileDialog } from './ftree/ftree.component';
 import { FileService } from './provider/file.service';
 import { GetFileName, ByteFormat } from './provider/fformat.pipe';
@@ -17,13 +17,14 @@ import { BasicAuthInterceptor } from './provider/basicauth.interceptor';
 @NgModule({
   declarations: [
     AppComponent, FTreeComponent, FtitleComponent,
-    FeditComponent, GetFileName, ByteFormat, NewFileDialog, ContextMenuPanel
+    FeditComponent, GetFileName, ByteFormat, NewFileDialog, ContextMenuPanel,
+    LoginDialog
   ],
   imports: [
     BrowserModule, HttpClientModule, FormsModule,
     ExportedMaterials, NoopAnimationsModule
   ],
-  entryComponents: [NewFileDialog, ContextMenuPanel],
+  entryComponents: [NewFileDialog, ContextMenuPanel, LoginDialog],
   providers: [FileService, {
     provide: HTTP_INTERCEPTORS,
     useClass: BasicAuthInterceptor,

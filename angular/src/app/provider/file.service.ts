@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { ZFile } from '../zfile';
 import 'rxjs/add/operator/toPromise';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 
 const API = 'http://localhost:3000/secuma';
@@ -15,6 +15,27 @@ export class FileService {
 
   readFile(path: string): Observable<any> {
     return this.http.get(path);
+  }
+
+  login(username: string, password: string): Observable<any> {
+    let url = API + '/login';
+    let resOB = new Subject<any>();
+    let rawHeader = this.makeRawHeaders()
+      .append('Authorization', 'Basic ' + btoa(username + ':' + password));
+
+    this.http.post(url, { username, password }, { headers: rawHeader })
+      .subscribe(response => {
+        localStorage.setItem('token', btoa(username + ':' + password));
+
+        let data0 = response;
+        resOB.next(data0);
+      });
+    return resOB.asObservable();
+  }
+
+  protected makeRawHeaders() {
+    let headers = new HttpHeaders();
+    return headers.append('__dumb__', 'raw');
   }
 
   openDir(path: string): Observable<ZFile> {

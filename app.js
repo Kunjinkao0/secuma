@@ -11,7 +11,7 @@ app.use(cors());
 
 var basicAuth = require('express-basic-auth');
 app.use(basicAuth({
-    users: { 'admin': 'supersecret' }
+    users: { 'admin': 'qqqqqq' }
 }));
 
 // allow cross origin access
