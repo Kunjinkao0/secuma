@@ -1,38 +1,63 @@
 #fedit {
-    flex: 1 1 auto;
-    display: flex;
-    flex-direction: column;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
 }
 
-#top-control {
-    display: flex;
-    flex: 0 1 40px;
-    flex-direction: row;
-    align-items: center;
-    flex-flow: row wrap;
-    justify-content: flex-end;
+#top-panel {
+  display: flex;
+  flex: 0 1 45px;
+  flex-direction: row;
+  align-items: center;
+  flex-flow: row wrap;
+  justify-content: flex-end;
 }
 
-.sm-matbtn { 
-    line-height: 15px;
-    min-height: 30px;
-    min-width: 50px;
-    vertical-align: center;
-    font-size: 13px;
-    padding: 0 0;
-    margin: 0;
+#tabs {
+  display: flex;
+  flex: 1 0 auto;
+  margin-left: 4px;
 }
 
-#edit-area {
-    flex: 1 1 auto;
-    display: flex;
+.sm-matbtn {
+  line-height: 15px;
+  min-height: 30px;
+  min-width: 50px;
+  vertical-align: center;
+  font-size: 13px;
+  padding: 0 0;
+  margin: 0;
 }
 
-textarea, textarea:focus {
-    width: 100%;
-    flex: 1 1 auto;
-    resize: none;
-    border: none;
-    outline: none !important;
-    padding: 10px;
+.tabbox {
+  font-size: 0.6em;
+  max-width: 80px;
+  margin: 0 6px;
+  padding: 8px 10px;
+  background: #F0F0F0;
+  box-shadow: none;
+  border-radius: 2px;
+  color: #AAA;
+}
+
+.tabbox:hover {
+  background: #DDDDDD;
+}
+
+.tabbox.activited {
+  background: #FFF;
+  box-shadow: 1px 1px 5px #888;
+  color: #333;
+}
+
+.tabtext {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+editarea {
+  margin: 0;
+  flex: 1 1 auto;
+  display: flex;
 }

@@ -1,15 +1,19 @@
 'use strict';
 
-let futils = require('./secuma/fileutils');
+// let futils = require('./secuma/fileutils');
 // let file = '/workspace/nodejs/secuma/package.json';
 
 // let res = futils.openFile(file, 'utf-8');
 // console.log(res);
 
 
-let file = '/workspace/nodejs/secuma/test';
+// let file = '/workspace/nodejs/secuma/test';
 // futils.mkdir(file);
 // futils.mkFile(file);
 // let data = 'abcdefghhijklmnopqrstuvwxyz';
 // futils.writeFile(file, data, 'utf-8');
-futils.deleteFile(file);
+// futils.deleteFile(file);
+
+
+let sth = require('./secuma/config.json').root;
+console.log(sth);

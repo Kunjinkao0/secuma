@@ -1,21 +1,39 @@
 <div *ngIf="file">
-  <div class="ctrlbar">
-    <button mat-button class="sm-ctrl" color="primary" (click)="createBtnClicked()">Create</button>
-    <button mat-button class="sm-ctrl" color="primary">Open</button>
+  <div class="ctrlbar noselect">
+    <img src="/assets/imgs/doge.png"/>
+    <span>S E C U M A</span>
+    <!--<button mat-button class="sm-ctrl" color="primary" (click)="createBtnClicked()">Create</button>-->
+    <!--<button mat-button class="sm-ctrl" color="primary">Open</button>-->
   </div>
   <mat-divider></mat-divider>
-  <div id="path-control">
-    <h6 matSubheader>{{file.path | basename}}/</h6>
+  <div id="path">
+    <span>{{file.path | basename}}/</span>
     <button mat-icon-button color="primary" *ngIf="ROOT != file.path" (click)="onUpFolderClick()">
       <mat-icon>arrow_upward</mat-icon>
     </button>
   </div>
   <mat-divider></mat-divider>
-  <div id="ftree" class="noselect" [style.max-height]="maxListHeight">
+  <div id="functions">
+    <button mat-icon-button color="basic" (click)="newFileClick()">
+      <mat-icon>note_add</mat-icon>
+    </button>
+    <button mat-icon-button color="basic" (click)="newFolderClick()">
+      <mat-icon>create_new_folder</mat-icon>
+    </button>
+    <button mat-icon-button color="basic" (click)="infoClick()">
+      <mat-icon>info</mat-icon>
+    </button>
+    <button mat-icon-button color="basic" (click)="moreClick()" disabled>
+      <mat-icon>more_horiz</mat-icon>
+    </button>
+  </div>
+  <mat-divider></mat-divider>
+  <div id="ftree" class="noselect" [style.max-height]="maxListHeight" [style.width]="listWidth">
     <mat-nav-list>
       <mat-list-item *ngFor="let f of file.children"
                      (click)="onItemClick(f)"
                      (contextmenu)="onContextMenuClick($event, f)">
+        <mat-icon *ngIf="f.isDirectory">folder</mat-icon>
         <span class="fname">
           <span>{{ f.name | basename }}</span>
         </span>

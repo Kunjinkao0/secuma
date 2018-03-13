@@ -11,7 +11,7 @@
 }
 
 #leftpanel {
-    flex: 0 1 220px;
+    flex: 0 1 200px;
     display: flex;
     background: gainsboro;
 }

@@ -1,0 +1,9 @@
+<div id="edit-container" [style.height]="maxHeight">
+  <ul id="edit-lines" class="noselect">
+    <li class="edit-line" *ngFor="let l of lines">{{l}}</li>
+  </ul>
+
+  <div id="edit-area" #cdiv contenteditable="true"
+       (keypress)="onEditTextChanged(cdiv.innerText)"
+       [innerHtml]="styledContent"></div>
+</div>

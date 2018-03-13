@@ -2,7 +2,7 @@
 const fs = require('fs');
 
 // ROOT path is a 'safe' path to let font end access
-const ROOT = '/Users/willi';
+const ROOT = require('./config.json').root;
 
 function exists(path) {
     try {

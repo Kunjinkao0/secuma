@@ -1,12 +1,21 @@
-<div id="fedit" *ngIf="content">
-  <div id="top-control">
-    <div id="function">
-      <button class="sm-matbtn" mat-raised-button color="primary" (click)="onSaveClicked()">Save</button>
-      <button class="sm-matbtn" mat-raised-button color="primary" disabled>Close</button>
+<div id="fedit">
+  <div id="top-panel">
+    <div id="tabs">
+      <div class="noselect single-line tabbox" *ngFor="let rf of runningFiles" (click)="onTabClicked(rf)"
+           [class.activited]="currFile === rf.file"
+           matTooltip="{{rf.file.name | basename}}">
+        <div class="tabtext" style="text-overflow: ellipsis;">{{rf.file.name | basename}}</div>
+      </div>
     </div>
+
+    <!--<div id="function">-->
+    <!--<button class="sm-matbtn" mat-raised-button color="primary" (click)="onSaveClicked()">Save</button>-->
+    <!--<button class="sm-matbtn" mat-raised-button color="primary" (click)="onCloseClicked()">Close</button>-->
+    <!--</div>-->
   </div>
+
   <mat-divider></mat-divider>
-  <div id="edit-area">
-    <textarea [(ngModel)]="content"></textarea>
-  </div>
+
+  <editarea #editarea></editarea>
+
 </div>

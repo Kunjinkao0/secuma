@@ -1,8 +1,18 @@
 .ctrlbar {
     display: flex;
     align-items: center;
-    justify-content: space-around;
-    height: 40px;
+    /*justify-content: space-around;*/
+    height: 45px;
+}
+
+.ctrlbar img {
+  height: 40px;
+  width: 40px;
+  margin-left: 16px;
+}
+
+.ctrlbar span {
+  font-weight: 900;
 }
 
 #ftree {
@@ -10,17 +20,37 @@
   overflow-x: auto;
 }
 
-#path-control {
+#path {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  padding-right: 2px;
+  height: 25px;
+  padding-left: 8px;
 }
 
-#path-control h6 {
+#path span {
   flex: 1 0 auto;
 }
 
-#path-control mat-icon {
-  font-size: 1.1em;
+#functions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+}
+
+#functions mat-icon {
+  font-size: 1.3em;
+}
+
+mat-list-item {
+  min-height: 24px !important;
+}
+
+.fname {
+  margin-left: 6px;
+}
+
+#functions {
+
 }

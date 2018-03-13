@@ -1,9 +1,10 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 
-import { ZFile } from '../zfile';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, Subject } from 'rxjs';
+import {ZFile} from '../zfile';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Observable, Subject} from 'rxjs';
 import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/map';
 
 const BASE_URL = 'http://localhost:3000/secuma'
 const API = BASE_URL + '/api';
@@ -11,11 +12,15 @@ const API = BASE_URL + '/api';
 @Injectable()
 export class FileService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
 
   readFile(path: string): Observable<any> {
-    return this.http.get(path);
+    let url = API + '/dir?fpath=' + path;
+    return this.http.get<any>(url).map(data => {
+      return data;
+    });
   }
 
   login(username: string, password: string): Observable<any> {
@@ -24,7 +29,7 @@ export class FileService {
     let rawHeader = this.makeRawHeaders()
       .append('Authorization', 'Basic ' + btoa(username + ':' + password));
 
-    this.http.post(url, { username, password }, { headers: rawHeader })
+    this.http.post(url, {username, password}, {headers: rawHeader})
       .subscribe(response => {
         localStorage.setItem('token', btoa(username + ':' + password));
 

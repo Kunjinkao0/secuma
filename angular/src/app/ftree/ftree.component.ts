@@ -1,12 +1,12 @@
-import { Component, OnInit, Output, EventEmitter, ViewChild, ViewContainerRef, AfterViewInit } from '@angular/core';
-import { Inject } from '@angular/core';
+import {Component, OnInit, Output, EventEmitter, ViewChild, ViewContainerRef, AfterViewInit} from '@angular/core';
+import {Inject} from '@angular/core';
 
-import { ZFile } from '../zfile';
-import { FileService } from '../provider/file.service';
-import { CdkOverlayOrigin, Overlay, OverlayConfig } from '@angular/cdk/overlay';
-import { CdkPortal, ComponentPortal, Portal } from '@angular/cdk/portal';
+import {ZFile} from '../zfile';
+import {FileService} from '../provider/file.service';
+import {CdkOverlayOrigin, Overlay, OverlayConfig} from '@angular/cdk/overlay';
+import {CdkPortal, ComponentPortal, Portal} from '@angular/cdk/portal';
 
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 
 @Component({
   selector: 'ftree',
@@ -20,8 +20,8 @@ export class FTreeComponent implements OnInit, AfterViewInit {
   @Output() fileOpenEvent: EventEmitter<ZFile> = new EventEmitter<ZFile>();
 
   constructor(private fileService: FileService,
-    public dialog: MatDialog,
-    public overlay: Overlay, public viewContainerRef: ViewContainerRef) {
+              public dialog: MatDialog,
+              public overlay: Overlay, public viewContainerRef: ViewContainerRef) {
   }
 
   ngOnInit() {
@@ -36,23 +36,40 @@ export class FTreeComponent implements OnInit, AfterViewInit {
 
   maxListHeight: string;
   maxListWidth: string;
+  listWidth: string;
 
   calListHeight() {
-    let h = document.body.clientHeight - 98;
-    this.maxListHeight = `${h}px`;
+    let mh = document.body.clientHeight - 98;
+    this.maxListHeight = `${mh}px`;
+
+    let mw = 200;
+    this.maxListWidth = `${mw}px`;
 
     let w = 200;
-    this.maxListWidth = `${w}px`;
+    this.listWidth = `${w}px`;
   }
 
   getZFileDetail(path: string): void {
-    setTimeout(() => {
+    // setTimeout(() => {
       this._getZFileDetail(path);
-    }, 300);
+    // }, 300);
   }
 
   _getZFileDetail(path: string): void {
     this.fileService.openDir(path).subscribe(data => {
+      // this.file = data;
+      let folders = [], files = [];
+      data.children.sort((f1, f2) => {
+        return f1.name.localeCompare(f2.name);
+      })
+      data.children.forEach(item => {
+        if (item.isDirectory) {
+          folders.push(item);
+        } else {
+          files.push(item);
+        }
+      });
+      data.children = folders.concat(files);
       this.file = data;
 
       this.onDirOpen();
@@ -95,7 +112,7 @@ export class FTreeComponent implements OnInit, AfterViewInit {
   createBtnClicked() {
     let dialogRef = this.dialog.open(NewFileDialog, {
       width: '250px',
-      data: { fname: '' }
+      data: {fname: ''}
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -139,7 +156,7 @@ export class FTreeComponent implements OnInit, AfterViewInit {
 export class NewFileDialog {
 
   constructor(public dialogRef: MatDialogRef<NewFileDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: any) {
+              @Inject(MAT_DIALOG_DATA) public data: any) {
   }
 
   onNoClick(): void {
