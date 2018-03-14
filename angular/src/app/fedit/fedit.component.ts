@@ -67,7 +67,7 @@ export class FeditComponent implements OnInit {
 
   private onFileOpened() {
     let content = this.getRunningFile(this.currFile).content;
-    this.editAreaComponent.content = content;
+    this.editAreaComponent.setContent(content);
   }
 
   private getRunningFile(file: ZFile): RunningFile {

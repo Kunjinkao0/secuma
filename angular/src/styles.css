@@ -64,3 +64,8 @@ app-root {
 .single-line {
   white-space: nowrap;
 }
+
+.CodeMirror {
+  font-family: Consolas;
+  font-size: 17px;
+}

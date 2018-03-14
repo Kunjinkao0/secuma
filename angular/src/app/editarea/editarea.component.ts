@@ -1,4 +1,7 @@
-import {Component, OnInit, Input, ViewChild, ElementRef, Renderer2} from '@angular/core';
+import {Component, OnInit, ViewChild, ElementRef} from '@angular/core';
+import 'codemirror/mode/javascript/javascript';
+
+declare const CodeMirror: any;
 
 @Component({
   selector: 'editarea',
@@ -7,50 +10,37 @@ import {Component, OnInit, Input, ViewChild, ElementRef, Renderer2} from '@angul
 })
 export class EditAreaComponent implements OnInit {
 
-  rawContent: string;
+  private rawContent: string;
+  private config = {
+    lineNumbers: true,
+    mode: "text/javascript"
+  };
 
-  @ViewChild('cdiv') cdiv: ElementRef;
+  @ViewChild('textarea') textArea: ElementRef;
+  // @ViewChild('codemirror') codeMirror: ElementRef;
 
-  set content(content: string) {
-    this.rawContent = content;
+  setContent(c: string) {
+    this.rawContent = c;
 
-    this.processContent(content);
+    this.editor.setValue(c);
+    // this.editor.refresh();
   }
-
-  styledContent: string;
-  lines: number[];
 
   maxHeight: string;
 
-  constructor(private el: ElementRef,
-              private render: Renderer2) {
-    this.lines = [];
+  constructor() {
   }
+
+  editor: any;
 
   ngOnInit() {
     let mh = document.body.clientHeight - 40;
     this.maxHeight = `${mh}px`;
-  }
 
-  processContent(content: string) {
-    let arrContent: string[] = content.split('\n');
-    this.lines = Array.from(Array(arrContent.length).keys()).map(x => ++x);
 
-    arrContent = arrContent.map(lineText =>
-      `<div class="cline"><pre>${lineText}</pre></div>`
-    );
+    // console.log(this.codeMirror.nativeElement)
 
-    this.styledContent = arrContent.join('');
-  }
-
-  onEditTextChanged(changedText: string) {
-    // let pos = this.cdiv.nativeElement.selectionStart;
-
-    // console.log(document.getSelection())
-    // this.processContent(changedText);
-    // setTimeout(() => {
-    //   this.cdiv.nativeElement.selectionStart = pos;
-    //   this.cdiv.nativeElement.selectionEnd = pos;
-    // });
+    this.editor = CodeMirror.fromTextArea(document.getElementById('text-area'), this.config);
+    this.editor.setSize("100%", "100%");
   }
 }

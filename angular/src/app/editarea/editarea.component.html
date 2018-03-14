@@ -1,9 +1,11 @@
 <div id="edit-container" [style.height]="maxHeight">
-  <ul id="edit-lines" class="noselect">
-    <li class="edit-line" *ngFor="let l of lines">{{l}}</li>
-  </ul>
+  <!--<ul id="edit-lines" class="noselect">-->
+  <!--<li class="edit-line" *ngFor="let l of lines">{{l}}</li>-->
+  <!--</ul>-->
+  <!--<codemirror [style.height]="maxHeight"-->
+  <!--[config]="config"-->
+  <!--[(ngModel)]="rawContent"></codemirror>-->
 
-  <div id="edit-area" #cdiv contenteditable="true"
-       (keypress)="onEditTextChanged(cdiv.innerText)"
-       [innerHtml]="styledContent"></div>
+  <textarea #textarea id="text-area"></textarea>
+  <!--<codemirror #codemirror [(ngModel)]="rawContent" [config]="config"></codemirror>-->
 </div>
