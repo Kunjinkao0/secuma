@@ -8,7 +8,7 @@ declare const CodeMirror: any;
 @Component({
   selector: 'editarea',
   templateUrl: './editarea.component.html',
-  styleUrls: ['./editarea.component.css']
+  styleUrls: ['./editarea.component.scss']
 })
 export class EditAreaComponent implements OnInit {
 

@@ -11,7 +11,7 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 @Component({
   selector: 'ftree',
   templateUrl: './ftree.component.html',
-  styleUrls: ['./ftree.component.css']
+  styleUrls: ['./ftree.component.scss']
 })
 export class FTreeComponent implements OnInit, AfterViewInit {
   file: ZFile;

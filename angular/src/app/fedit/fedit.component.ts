@@ -9,7 +9,7 @@ import {EditAreaComponent} from "../editarea/editarea.component";
 @Component({
   selector: 'fedit',
   templateUrl: './fedit.component.html',
-  styleUrls: ['./fedit.component.css'],
+  styleUrls: ['./fedit.component.scss'],
   providers: [ActiveFileService]
 })
 export class FeditComponent implements OnInit {
