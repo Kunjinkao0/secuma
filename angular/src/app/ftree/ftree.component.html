@@ -1,19 +1,19 @@
-<div *ngIf="file">
-  <div class="ctrlbar noselect">
+<div id="container" *ngIf="file">
+  <div class="logobar noselect">
     <img src="/assets/imgs/doge.png"/>
     <span>S E C U M A</span>
     <!--<button mat-button class="sm-ctrl" color="primary" (click)="createBtnClicked()">Create</button>-->
     <!--<button mat-button class="sm-ctrl" color="primary">Open</button>-->
   </div>
   <mat-divider></mat-divider>
-  <div id="path">
+  <div id="pathbar">
     <span>{{file.path | basename}}/</span>
     <button mat-icon-button color="primary" *ngIf="ROOT != file.path" (click)="onUpFolderClick()">
       <mat-icon>arrow_upward</mat-icon>
     </button>
   </div>
   <mat-divider></mat-divider>
-  <div id="functions">
+  <div id="funcbar">
     <button mat-icon-button color="basic" (click)="newFileClick()">
       <mat-icon>note_add</mat-icon>
     </button>
@@ -28,7 +28,7 @@
     </button>
   </div>
   <mat-divider></mat-divider>
-  <div id="ftree" class="noselect" [style.max-height]="maxListHeight" [style.width]="listWidth">
+  <div id="ftree" class="noselect" [style.width]="listWidth">
     <mat-nav-list>
       <mat-list-item *ngFor="let f of file.children"
                      (click)="onItemClick(f)"

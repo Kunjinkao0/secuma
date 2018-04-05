@@ -34,17 +34,9 @@ export class FTreeComponent implements OnInit, AfterViewInit {
     this.calListHeight();
   }
 
-  maxListHeight: string;
-  maxListWidth: string;
   listWidth: string;
 
   calListHeight() {
-    let mh = document.body.clientHeight - 120;
-    this.maxListHeight = `${mh}px`;
-
-    let mw = 200;
-    this.maxListWidth = `${mw}px`;
-
     let w = 200;
     this.listWidth = `${w}px`;
   }

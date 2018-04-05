@@ -6,11 +6,10 @@
 
 #top-panel {
   display: flex;
-  flex: 0 1 45px;
+  flex: 0 0 45px;
   flex-direction: row;
   align-items: center;
   flex-flow: row wrap;
-  justify-content: flex-end;
 }
 
 #tabs {

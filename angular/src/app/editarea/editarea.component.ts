@@ -29,13 +29,9 @@ export class EditAreaComponent implements OnInit {
     this.editor.setValue(this.content);
   }
 
-  maxHeight: string;
   editor: any;
 
   ngOnInit() {
-    let mh = document.body.clientHeight - 40;
-    this.maxHeight = `${mh}px`;
-
     this.editor = CodeMirror.fromTextArea(document.getElementById('text-area'), this.config);
     this.editor.setSize("100%", "100%");
     // this.editor.on('change', editor => {
