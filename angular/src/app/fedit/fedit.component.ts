@@ -2,26 +2,23 @@ import {Component, OnInit, Output, EventEmitter, ViewChild} from '@angular/core'
 
 import {FileService} from '../provider/file.service';
 import {ZFile} from '../zfile';
-import {FeditService} from "./fedit.service";
-import {RunningFile} from "./runningfile";
+import {ActiveFileService} from "./activefile.service";
+import {ActiveFile} from "./activefile";
 import {EditAreaComponent} from "../editarea/editarea.component";
 
 @Component({
   selector: 'fedit',
   templateUrl: './fedit.component.html',
   styleUrls: ['./fedit.component.css'],
-  providers: [FeditService]
+  providers: [ActiveFileService]
 })
 export class FeditComponent implements OnInit {
   currFile: ZFile;
-  runningFiles: RunningFile[];
 
   @ViewChild('editarea') editAreaComponent: EditAreaComponent;
 
   constructor(private fileService: FileService,
-              private feditService: FeditService) {
-    this.runningFiles = [];
-
+              private activeFileService: ActiveFileService) {
     // for (let i = 0; i < 5; i++) {
     //   this.runningFiles.push({
     //     file: {
@@ -34,53 +31,32 @@ export class FeditComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.activeFileService.clear();
   }
 
   openFile(f: ZFile) {
-    // file utils here: check two file is the samedf
     this.currFile = f;
 
-    if (this.isFileRunning(f)) {
-      this.activateTab(f);
+    if (this.activeFileService.isFileActivated(f)) {
+      this.renderActivatedFile();
     } else {
-      let rf = new RunningFile();
-      rf.file = f;
-      this.runningFiles.push(rf);
+      let activeF = this.activeFileService.addActiveFile(f);
 
       this.fileService.openFile(this.currFile.path, 'utf-8').subscribe(res => {
-        rf.content = res.data;
+        activeF.content = res.data;
 
-        this.activateTab(f);
+        this.renderActivatedFile();
       });
     }
   }
 
-  private isFileRunning(file: ZFile): boolean {
-    return this.getRunningFile(file) != null;
+  private renderActivatedFile() {
+    let runningFile = this.activeFileService.getActivatedFile(this.currFile);
+    this.editAreaComponent.setContent(runningFile);
   }
 
-  private activateTab(file: ZFile) {
-    this.currFile = file;
-
-    this.onFileOpened();
-  }
-
-  private onFileOpened() {
-    let content = this.getRunningFile(this.currFile).content;
-    this.editAreaComponent.setContent(content);
-  }
-
-  private getRunningFile(file: ZFile): RunningFile {
-    let runningFile = null;
-    this.runningFiles.forEach(rf => {
-      if (rf.file.path == file.path) runningFile = rf;
-    });
-
-    return runningFile;
-  }
-
-  onTabClicked(rf: RunningFile) {
-    this.openFile(rf.file);
+  private onTabClicked(activeF: ActiveFile) {
+    this.openFile(activeF.file);
   }
 
   // onSaveClicked() {

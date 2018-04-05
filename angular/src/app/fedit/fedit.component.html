@@ -1,7 +1,7 @@
 <div id="fedit">
   <div id="top-panel">
     <div id="tabs">
-      <div class="noselect single-line tabbox" *ngFor="let rf of runningFiles" (click)="onTabClicked(rf)"
+      <div class="noselect single-line tabbox" *ngFor="let rf of activeFileService.getAllActivated()" (click)="onTabClicked(rf)"
            [class.activited]="currFile === rf.file"
            matTooltip="{{rf.file.name | basename}}">
         <div class="tabtext" style="text-overflow: ellipsis;">{{rf.file.name | basename}}</div>
@@ -16,6 +16,6 @@
 
   <mat-divider></mat-divider>
 
-  <editarea #editarea></editarea>
+  <editarea *ngIf="activeFileService.getAllActivated().length > 0" #editarea></editarea>
 
 </div>

@@ -1,5 +1,7 @@
 import {Component, OnInit, ViewChild, ElementRef} from '@angular/core';
 import 'codemirror/mode/javascript/javascript';
+import {ActiveFileService} from "../fedit/activefile.service";
+import {ActiveFile} from "../fedit/activefile";
 
 declare const CodeMirror: any;
 
@@ -10,37 +12,35 @@ declare const CodeMirror: any;
 })
 export class EditAreaComponent implements OnInit {
 
-  private rawContent: string;
+  constructor(private activeFileService: ActiveFileService) {
+  }
+
+  @ViewChild('textarea') textArea: ElementRef;
+
   private config = {
     lineNumbers: true,
     mode: "text/javascript"
   };
 
-  @ViewChild('textarea') textArea: ElementRef;
-  // @ViewChild('codemirror') codeMirror: ElementRef;
+  private content: string;
 
-  setContent(c: string) {
-    this.rawContent = c;
-
-    this.editor.setValue(c);
-    // this.editor.refresh();
+  setContent(file: ActiveFile) {
+    this.content = file.content;
+    this.editor.setValue(this.content);
   }
 
   maxHeight: string;
-
-  constructor() {
-  }
-
   editor: any;
 
   ngOnInit() {
     let mh = document.body.clientHeight - 40;
     this.maxHeight = `${mh}px`;
 
-
-    // console.log(this.codeMirror.nativeElement)
-
     this.editor = CodeMirror.fromTextArea(document.getElementById('text-area'), this.config);
     this.editor.setSize("100%", "100%");
+    // this.editor.on('change', editor => {
+    //   let value = editor.getValue();
+    //   console.log(value);
+    // });
   }
 }
