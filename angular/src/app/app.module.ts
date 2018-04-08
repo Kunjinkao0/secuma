@@ -14,12 +14,13 @@ import {FormsModule} from '@angular/forms';
 import {BasicAuthInterceptor} from './provider/basicauth.interceptor';
 import {EditAreaComponent} from "./editarea/editarea.component";
 import {CodemirrorModule} from "ng2-codemirror";
+import {BaseComponent} from "./base.component";
 
 @NgModule({
   declarations: [
     AppComponent, FTreeComponent, FeditComponent,
     GetFileName, ByteFormat, NewFileDialog, ContextMenuPanel,
-    LoginDialog, EditAreaComponent
+    LoginDialog, EditAreaComponent, BaseComponent
   ],
   imports: [
     BrowserModule, HttpClientModule, FormsModule,

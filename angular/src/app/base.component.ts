@@ -1,7 +1,11 @@
 import { Component } from "@angular/core";
 
 
-@Component({})
-export abstract class BaseComponent {
-    
+@Component({
+  selector: "base-component",
+  template: "",
+  styles: []
+})
+export class BaseComponent {
+
 }

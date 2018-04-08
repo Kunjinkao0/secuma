@@ -18,7 +18,7 @@ export class FeditComponent implements OnInit {
   @ViewChild('editarea') editAreaComponent: EditAreaComponent;
 
   constructor(private fileService: FileService,
-              private activeFileService: ActiveFileService) {
+              public activeFileService: ActiveFileService) {
     // for (let i = 0; i < 5; i++) {
     //   this.runningFiles.push({
     //     file: {
