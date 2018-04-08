@@ -6,8 +6,7 @@ import {Observable, Subject} from 'rxjs';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 
-const BASE_URL = 'http://localhost:3000/secuma'
-const API = BASE_URL + '/api';
+const API = '/secuma/api';
 
 @Injectable()
 export class FileService {
