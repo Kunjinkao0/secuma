@@ -13,7 +13,7 @@ router.get('/', function (req, res, next) {
 });
 const basicAuth = require('express-basic-auth');
 router.use('/api', basicAuth({
-    users: user
+    users: { [user.name]: user.pwd}
 }));
 
 router.post('/api/login', function (req, res, next) {
