@@ -1,3 +1,7 @@
 {
-  "root": "/Users/willi/workspace"
+  "root": "/Users/willi/workspace",
+  "user": {
+    "name": "admin",
+    "pwd": "qqqqqq"
+  }
 }

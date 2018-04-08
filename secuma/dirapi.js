@@ -6,12 +6,14 @@ const path = require('path');
 
 const futils = require('./fileutils');
 
+const user = require('./config.json').user;
+
 router.get('/', function (req, res, next) {
     res.sendFile(path.join(__dirname, '../public/secuma/index.html'));
 });
 const basicAuth = require('express-basic-auth');
 router.use('/api', basicAuth({
-    users: { 'admin': 'qqqqqq' }
+    users: user
 }));
 
 router.post('/api/login', function (req, res, next) {
