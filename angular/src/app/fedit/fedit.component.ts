@@ -14,11 +14,13 @@ import {EditAreaComponent} from "../editarea/editarea.component";
 })
 export class FeditComponent implements OnInit {
   currFile: ZFile;
+ // private activatedFiles: ActiveFile[];
 
   @ViewChild('editarea') editAreaComponent: EditAreaComponent;
 
   constructor(private fileService: FileService,
               public activeFileService: ActiveFileService) {
+
     // for (let i = 0; i < 5; i++) {
     //   this.runningFiles.push({
     //     file: {
@@ -80,4 +82,52 @@ export class FeditComponent implements OnInit {
   //   );
   //   this.runningFiles = arr;
   // }
+  onCloseClicked(name1:String, rf: ActiveFile[]){
+    //获取Id
+
+   // alert(rf[0].file.name);
+    let fileNameAll=name1;
+    let fileName=fileNameAll.split(/\//);
+    let idValue=fileName[5];
+
+    var tabToClase=document.getElementById(idValue);
+    tabToClase.remove();
+    //this.activeFileService.delActivateFile(name1,rf);
+    var a=this.activeFileService.getAllActivated();
+
+
+
+    for(var i=0;i<=a.length-1;i++){
+      var name=a[i].file.name;
+      if(name == name1 && (a.length-1)> 0 && i!=(a.length-1)){
+        var TEMP=a[i];
+        for(var l=0;l<(a.length-1)-i;l++){
+          a[i+l]=a[i+l+1];
+        }
+        a[a.length-1]=TEMP;
+        let runningFile = this.activeFileService.getActivatedFile(a[i].file);
+        this.editAreaComponent.setContent(runningFile);
+        a.pop();
+        break;
+      }else if (name==name1 && (a.length-1)==0){
+        a.pop();
+        let runningFile = this.activeFileService.getActivatedFile(a[i].file);
+        this.editAreaComponent.setContent(runningFile);
+        break;
+      }else if (name==name1 && (a.length-1)==i&& i!=0){
+        a.pop();
+        let runningFile = this.activeFileService.getActivatedFile(a[i-1].file);
+        this.editAreaComponent.setContent(runningFile);
+        break;
+        //测试上传使用
+
+      }
+
+    }
+
+
+
+
+
+  }
 }

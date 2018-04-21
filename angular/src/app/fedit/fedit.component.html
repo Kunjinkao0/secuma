@@ -3,8 +3,9 @@
     <div id="tabs">
       <div class="noselect single-line tabbox" *ngFor="let rf of activeFileService.getAllActivated()" (click)="onTabClicked(rf)"
            [class.activited]="currFile === rf.file"
-           matTooltip="{{rf.file.name | basename}}">
+           matTooltip="{{rf.file.name | basename}}"  id="{{rf.file.name | basename}}">
         <div class="tabtext" style="text-overflow: ellipsis;">{{rf.file.name | basename}}</div>
+        <button  (click)="onCloseClicked(rf.file.name,rf)" >close</button>
       </div>
     </div>
 
